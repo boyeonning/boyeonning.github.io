@@ -113,7 +113,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "보랑이"
+  name             : "yoni"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "I am an **amazing** person."
   location         : "Somewhere"
