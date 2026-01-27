@@ -1,0 +1,221 @@
+---
+layout: post
+title: "Python @contextmanager와 yield 완벽 이해하기"
+---
+
+# Python @contextmanager와 yield 완벽 이해하기
+
+## 🤔 contextmanager가 뭐길래?
+
+파일을 열고 닫거나, DB 연결을 관리할 때 `with` 문을 사용하죠? 
+이걸 **쉽게** 만들어주는 게 `@contextmanager`입니다!
+
+---
+
+## 📚 비교: yield 없이 vs yield 사용
+
+### ❌ 방법 1: yield 없이 (클래스로 만들기)
+```python
+class FileManager:
+    def __init__(self, filename):
+        self.filename = filename
+        
+    def __enter__(self):
+        print("파일 열기")
+        self.file = open(self.filename, 'w')
+        return self.file
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print("파일 닫기")
+        self.file.close()
+
+# 사용
+with FileManager('test.txt') as f:
+    f.write('안녕하세요')
+```
+
+**단점:**
+- `__enter__`와 `__exit__` 두 개 메서드를 따로 작성해야 함
+- 코드가 길고 복잡함
+- 클래스 구조 이해 필요
+
+---
+
+### ✅ 방법 2: @contextmanager + yield (함수로 간단히!)
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def file_manager(filename):
+    print("파일 열기")
+    f = open(filename, 'w')
+    
+    yield f  # ← 여기서 멈춤! with 블록으로 f 전달
+    
+    print("파일 닫기")
+    f.close()
+
+# 사용 (똑같음!)
+with file_manager('test.txt') as f:
+    f.write('안녕하세요')
+```
+
+**장점:**
+- 함수 하나로 끝!
+- 코드가 짧고 읽기 쉬움
+- yield 기준으로 전/후 작업이 명확히 구분됨
+
+---
+
+## 🎯 핵심 차이점
+
+| 구분 | yield 없이 (클래스) | @contextmanager + yield |
+|------|---------------------|--------------------------|
+| **코드량** | 길고 복잡 | 짧고 간단 |
+| **구조** | 클래스 + 2개 메서드 | 함수 1개 |
+| **구분** | `__enter__`와 `__exit__` 분리 | yield 기준으로 위/아래 |
+| **난이도** | 중급 | 초급 |
+
+---
+
+## 🔍 yield가 정확히 하는 일
+```python
+@contextmanager
+def my_context():
+    print("1. 준비 작업 (before)")
+    
+    yield "반환값"  # ← with 블록이 실행되는 동안 여기서 대기!
+    
+    print("3. 정리 작업 (after)")
+
+# 사용
+with my_context() as value:
+    print(f"2. 작업 중: {value}")
+```
+
+**실행 순서:**
+```
+1. 준비 작업 (before)
+2. 작업 중: 반환값
+3. 정리 작업 (after)
+```
+
+**동작 원리:**
+1. `yield` 전까지 실행 (준비 작업)
+2. `yield`에서 멈추고 값을 `with` 블록에 전달
+3. `with` 블록 내부 코드 실행
+4. `with` 블록 종료 후 `yield` 이후 코드 실행 (정리 작업)
+
+---
+
+## 💡 실전 예제
+
+### 예제 1: 데이터베이스 세션 관리
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def db_session():
+    # 연결 열기
+    session = create_session()
+    
+    try:
+        yield session  # 작업하는 동안 대기
+        session.commit()  # 성공하면 커밋
+    except:
+        session.rollback()  # 에러나면 롤백
+        raise
+    finally:
+        session.close()  # 무조건 닫기
+
+# 사용
+with db_session() as session:
+    session.add(User(name='홍길동'))
+    session.add(User(name='김철수'))
+    # 자동으로 commit/close 됨!
+```
+
+### 예제 2: 시간 측정
+```python
+import time
+from contextlib import contextmanager
+
+@contextmanager
+def timer(name):
+    print(f"[{name}] 시작")
+    start = time.time()
+    
+    yield
+    
+    elapsed = time.time() - start
+    print(f"[{name}] 완료: {elapsed:.2f}초")
+
+# 사용
+with timer("데이터 처리"):
+    # 무거운 작업
+    time.sleep(2)
+```
+
+**출력:**
+```
+[데이터 처리] 시작
+[데이터 처리] 완료: 2.00초
+```
+
+### 예제 3: 임시 디렉토리 변경
+```python
+import os
+from contextlib import contextmanager
+
+@contextmanager
+def change_dir(path):
+    original = os.getcwd()
+    os.chdir(path)
+    print(f"디렉토리 변경: {path}")
+    
+    yield
+    
+    os.chdir(original)
+    print(f"디렉토리 복원: {original}")
+
+# 사용
+with change_dir('/tmp'):
+    print(f"현재 위치: {os.getcwd()}")
+    # /tmp에서 작업
+# 자동으로 원래 디렉토리로 복원됨
+```
+
+---
+
+## 🎓 정리
+
+- **@contextmanager + yield**: 클래스 없이 함수만으로 context manager 만들기
+- **yield 전**: 준비 작업 (리소스 획득)
+- **yield**: 값 전달 & 대기
+- **yield 후**: 정리 작업 (리소스 해제)
+
+**언제 사용하나요?**
+- 파일 열기/닫기
+- DB 연결 관리
+- 락(Lock) 획득/해제
+- 임시 설정 변경/복원
+- 시간 측정
+- 로깅 범위 지정
+
+---
+
+## 📌 기억하세요!
+
+> `@contextmanager + yield` = 복잡한 클래스 대신 **간단한 함수 하나**로 with 문 만들기! 🚀
+```python
+# 이것만 기억하세요!
+@contextmanager
+def my_manager():
+    # 시작 작업
+    yield 값
+    # 종료 작업
+```
+
+---
+
+*작성일: 2025년 1월*
