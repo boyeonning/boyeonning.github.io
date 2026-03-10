@@ -113,7 +113,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "yoni"
+  name             : "boyeon"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "AI Data Manager. Passionate about Python, computer vision, and building smart data pipelines."
   location         : "Seoul, Korea"
