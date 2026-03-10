@@ -115,8 +115,8 @@ analytics:
 author:
   name             : "yoni"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
+  bio              : "AI Data Manager. Passionate about Python, computer vision, and building smart data pipelines."
+  location         : "Seoul, Korea"
   email            :
   links:
     - label: "Email"
