@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Custom Home Page Styles
+   ========================================================================== */
+
+.home-category-section {
+  margin-bottom: 2em;
+}
+
+.home-category-title {
+  font-size: $type-size-4;
+  font-weight: bold;
+  border-bottom: 2px solid $border-color;
+  padding-bottom: 0.4em;
+  margin-bottom: 1em;
+}
+
+.home-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 1em;
+  margin-bottom: 1.5em;
+}
+
+.home-category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2em 0.8em;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  text-decoration: none !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  background: $background-color;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: $link-color;
+    text-decoration: none !important;
+  }
+}
+
+.home-category-icon {
+  font-size: 2em;
+  margin-bottom: 0.3em;
+  line-height: 1;
+}
+
+.home-category-name {
+  font-size: $type-size-5;
+  font-weight: bold;
+  color: $text-color;
+  margin-bottom: 0.2em;
+}
+
+.home-category-count {
+  font-size: $type-size-7;
+  color: $muted-text-color;
+}

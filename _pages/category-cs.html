@@ -1,0 +1,11 @@
+---
+layout: archive
+title: "CS"
+permalink: /categories/cs/
+author_profile: true
+---
+
+{% assign posts = site.categories['CS'] %}
+{% for post in posts %}
+  {% include archive-single.html %}
+{% endfor %}

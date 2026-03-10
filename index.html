@@ -2,3 +2,42 @@
 layout: home
 author_profile: true
 ---
+
+<div class="home-category-section">
+  <h3 class="home-category-title">Categories</h3>
+  <div class="home-category-grid">
+
+    <a href="/categories/cvat/" class="home-category-card">
+      <div class="home-category-icon">🎯</div>
+      <div class="home-category-name">CVAT</div>
+      <div class="home-category-count">
+        {{ site.categories['CVAT'] | size }} posts
+      </div>
+    </a>
+
+    <a href="/categories/python/" class="home-category-card">
+      <div class="home-category-icon">🐍</div>
+      <div class="home-category-name">Python</div>
+      <div class="home-category-count">
+        {{ site.categories['Python'] | size }} posts
+      </div>
+    </a>
+
+    <a href="/categories/backend/" class="home-category-card">
+      <div class="home-category-icon">⚙️</div>
+      <div class="home-category-name">Backend</div>
+      <div class="home-category-count">
+        {{ site.categories['Backend'] | size }} posts
+      </div>
+    </a>
+
+    <a href="/categories/cs/" class="home-category-card">
+      <div class="home-category-icon">💡</div>
+      <div class="home-category-name">CS</div>
+      <div class="home-category-count">
+        {{ site.categories['CS'] | size }} posts
+      </div>
+    </a>
+
+  </div>
+</div>

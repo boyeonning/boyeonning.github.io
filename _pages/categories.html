@@ -1,0 +1,17 @@
+---
+layout: archive
+title: "Categories"
+permalink: /categories/
+author_profile: true
+---
+
+{% assign categories_sorted = site.categories | sort %}
+
+{% for category in categories_sorted %}
+  <h2 id="{{ category[0] | slugify }}" class="archive__subtitle">{{ category[0] }}</h2>
+  <div class="entries-list">
+    {% for post in category[1] %}
+      {% include archive-single.html type="list" %}
+    {% endfor %}
+  </div>
+{% endfor %}
