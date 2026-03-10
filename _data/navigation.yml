@@ -2,11 +2,7 @@
 main:
   - title: "Home"
     url: /
-  - title: "CVAT"
-    url: /categories/cvat/
-  - title: "Python"
-    url: /categories/python/
-  - title: "Backend"
-    url: /categories/backend/
-  - title: "CS"
-    url: /categories/cs/
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/
