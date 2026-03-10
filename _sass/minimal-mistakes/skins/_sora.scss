@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Sora (소라색 - sky blue) skin
+   ========================================================================== */
+
+/* Colors */
+$background-color: #f4f8fb !default;
+$text-color: #2c3e50 !default;
+$muted-text-color: #5d7a8a !default;
+$primary-color: #5b9ec9 !default;
+$border-color: mix(#fff, #5d7a8a, 75%) !default;
+$footer-background-color: #7ec8e3 !default;
+$link-color: #3a86b8 !default;
+$masthead-link-color: $text-color !default;
+$masthead-link-color-hover: $primary-color !default;
+$navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
+
+.page__footer {
+  color: #fff !important;
+}
+
+.page__footer-follow .social-icons i,
+.page__footer-follow .social-icons .svg-inline--fa {
+  color: inherit;
+}
