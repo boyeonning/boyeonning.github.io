@@ -1,0 +1,32 @@
+<svg width="680" height="200" viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff">
+  <text font-family="sans-serif" font-size="15" font-weight="600" fill="#333" x="340" y="22" text-anchor="middle">minAreaRect 각도 보정 요약</text>
+  
+  <!-- divider -->
+  <line x1="340" y1="40" x2="340" y2="190" stroke="#ddd" stroke-width="1"/>
+  
+  <!-- Left: -45 < angle <= 0 -->
+  <rect x="20" y="40" width="300" height="150" rx="8" fill="#F0F8FF" stroke="#B5D4F4" stroke-width="1"/>
+  <text font-family="sans-serif" font-size="13" font-weight="600" fill="#185FA5" x="170" y="62" text-anchor="middle">-45 &lt; angle ≤ 0</text>
+  <text font-family="sans-serif" font-size="12" fill="#555" x="170" y="84" text-anchor="middle">"width"가 긴 변 (가로에 가까움)</text>
+  
+  <g transform="translate(170,130) rotate(-10)">
+    <rect x="-60" y="-25" width="120" height="50" rx="2" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+    <line x1="-60" y1="25" x2="60" y2="25" stroke="#E24B4A" stroke-width="2"/>
+  </g>
+  
+  <rect x="110" y="168" width="120" height="22" rx="11" fill="#E6F1FB"/>
+  <text font-family="sans-serif" font-size="11" font-weight="600" fill="#0C447C" x="170" y="183" text-anchor="middle">그대로 사용 ✓</text>
+  
+  <!-- Right: -90 <= angle <= -45 -->
+  <rect x="360" y="40" width="300" height="150" rx="8" fill="#FFF8F0" stroke="#F5C4B3" stroke-width="1"/>
+  <text font-family="sans-serif" font-size="13" font-weight="600" fill="#993C1D" x="510" y="62" text-anchor="middle">-90 ≤ angle ≤ -45</text>
+  <text font-family="sans-serif" font-size="12" fill="#555" x="510" y="84" text-anchor="middle">"width"가 짧은 변 (세로에 가까움)</text>
+  
+  <g transform="translate(510,125) rotate(-80)">
+    <rect x="-60" y="-25" width="120" height="50" rx="2" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.8"/>
+    <line x1="-60" y1="25" x2="60" y2="25" stroke="#E24B4A" stroke-width="2"/>
+  </g>
+  
+  <rect x="430" y="168" width="160" height="22" rx="11" fill="#FCEBEB"/>
+  <text font-family="sans-serif" font-size="11" font-weight="600" fill="#791F1F" x="510" y="183" text-anchor="middle">90 + angle 로 보정!</text>
+</svg>
