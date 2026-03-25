@@ -1,4 +1,10 @@
-# OpenCV `minAreaRect` 각도 보정 이해하기
+---
+layout: post
+title: "OpenCV minAreaRect 각도 보정 이해하기"
+date: 2026-03-25
+categories: [opencv, python]
+tags: [opencv, minAreaRect, angle, 기울기보정]
+---
 
 ## 코드
 
@@ -29,7 +35,7 @@ if angle < -45:
 
 ### Case 1: angle = -10 (보정 불필요)
 
-![Case 1: angle = -10](./images/case1.svg)
+![Case 1: angle = -10](/assets/images/case1.svg)
 
 - "width" = **긴 변** (가로 방향)
 - 긴 변이 수평에서 10도 기울어짐 → angle = **-10**
@@ -38,7 +44,7 @@ if angle < -45:
 
 ### Case 2: angle = -80 (보정 필요!)
 
-![Case 2: angle = -80](./images/case2.svg)
+![Case 2: angle = -80](/assets/images/case2.svg)
 
 - "width" = **짧은 변** (세로 방향에 가까움)
 - 짧은 변이 수평에서 80도 기울어짐 → angle = **-80**
@@ -48,7 +54,7 @@ if angle < -45:
 
 ## 보정 요약
 
-![보정 요약](./images/summary.svg)
+![보정 요약](/assets/images/summary.svg)
 
 | 각도 범위 | 의미 | 보정 |
 |-----------|------|------|
