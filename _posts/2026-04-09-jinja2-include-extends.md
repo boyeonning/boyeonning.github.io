@@ -36,13 +36,13 @@ Jinja2에서 템플릿을 재사용하는 방법은 크게 두 가지입니다: 
 ```
 
 **`index.html`**
-```html
 {% raw %}
+```html
 {% include "_nav.html" %}
 
 <h1>메인 페이지입니다</h1>
-{% endraw %}
 ```
+{% endraw %}
 
 **렌더링 결과:**
 ```html
@@ -66,8 +66,8 @@ Jinja2에서 템플릿을 재사용하는 방법은 크게 두 가지입니다: 
 
 ### 부모 템플릿 (`base.html`)
 
-```html
 {% raw %}
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,13 +85,13 @@ Jinja2에서 템플릿을 재사용하는 방법은 크게 두 가지입니다: 
   <footer>공통 푸터</footer>
 </body>
 </html>
-{% endraw %}
 ```
+{% endraw %}
 
 ### 자식 템플릿 (`page.html`)
 
-```html
 {% raw %}
+```html
 {% extends "base.html" %}
 
 {% block title %}상품 목록{% endblock %}
@@ -103,8 +103,8 @@ Jinja2에서 템플릿을 재사용하는 방법은 크게 두 가지입니다: 
     <li>바나나</li>
   </ul>
 {% endblock %}
-{% endraw %}
 ```
+{% endraw %}
 
 **렌더링 결과:**
 ```html
@@ -137,14 +137,14 @@ Jinja2에서 템플릿을 재사용하는 방법은 크게 두 가지입니다: 
 
 `extends`에서 부모 block의 내용을 **완전히 교체하지 않고 유지하면서 추가**하고 싶을 때 `super()`를 씁니다.
 
-```html
 {% raw %}
+```html
 {% block content %}
   {{ super() }}  {# 부모의 기본 내용 포함 #}
   <p>추가로 보여줄 내용</p>
 {% endblock %}
-{% endraw %}
 ```
+{% endraw %}
 
 ---
 
@@ -175,6 +175,7 @@ def products(request: Request):
     return templates.TemplateResponse("products.html", {"request": request})
 ```
 
+{% raw %}
 ```
 templates/
   base.html         ← 공통 레이아웃 (extends 대상)
@@ -182,6 +183,7 @@ templates/
   products.html     ← {% extends "base.html" %}
   about.html        ← {% extends "base.html" %}
 ```
+{% endraw %}
 
 ---
 
